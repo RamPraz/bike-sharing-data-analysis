@@ -29,7 +29,77 @@
 						"type": "CosmosDbSqlApiSink",
 						"writeBehavior": "insert"
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "['station_status']"
+								},
+								"sink": {
+									"path": "station_status"
+								}
+							},
+							{
+								"source": {
+									"path": "['num_bikes_available']"
+								},
+								"sink": {
+									"path": "num_bikes_available"
+								}
+							},
+							{
+								"source": {
+									"path": "['last_reported']"
+								},
+								"sink": {
+									"path": "last_reported"
+								}
+							},
+							{
+								"source": {
+									"path": "['station_id']"
+								},
+								"sink": {
+									"path": "station_id"
+								}
+							},
+							{
+								"source": {
+									"path": "['num_ebikes_available']"
+								},
+								"sink": {
+									"path": "num_ebikes_available"
+								}
+							},
+							{
+								"source": {
+									"path": "['num_docks_available']"
+								},
+								"sink": {
+									"path": "num_docks_available"
+								}
+							},
+							{
+								"source": {
+									"path": "$['last_updated']"
+								},
+								"sink": {
+									"path": "last_updated"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ttl']"
+								},
+								"sink": {
+									"path": "ttl"
+								}
+							}
+						],
+						"collectionReference": "$['data']['stations']"
+					}
 				},
 				"inputs": [
 					{
