@@ -1,0 +1,17 @@
+{
+	"name": "bike_status_src",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Divvy status api",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			}
+		},
+		"schema": {}
+	}
+}
