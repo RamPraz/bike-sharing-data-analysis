@@ -1,0 +1,12 @@
+{
+	"name": "Divvy status api",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://gbfs.divvybikes.com/gbfs/fr/station_status.json",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
