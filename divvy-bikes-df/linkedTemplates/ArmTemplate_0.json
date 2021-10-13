@@ -217,7 +217,7 @@
 											"path": "$['last_updated']"
 										},
 										"sink": {
-											"path": "$['_ts']"
+											"path": "$['last_updated']"
 										}
 									},
 									{
@@ -265,7 +265,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Stopped",
+				"runtimeState": "Started",
 				"pipelines": [
 					{
 						"pipelineReference": {
@@ -279,7 +279,7 @@
 				"typeProperties": {
 					"recurrence": {
 						"frequency": "Minute",
-						"interval": 10,
+						"interval": 5,
 						"startTime": "2021-10-13T14:30:00",
 						"endTime": "2021-10-14T07:00:00",
 						"timeZone": "Central Standard Time"
