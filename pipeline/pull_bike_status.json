@@ -27,7 +27,8 @@
 					},
 					"sink": {
 						"type": "CosmosDbSqlApiSink",
-						"writeBehavior": "insert"
+						"writeBehavior": "upsert",
+						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
 					"translator": {
