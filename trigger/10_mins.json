@@ -1,0 +1,25 @@
+{
+	"name": "10_mins",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pull_bike_status",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 10,
+				"startTime": "2021-10-13T14:30:00",
+				"endTime": "2021-10-14T07:00:00",
+				"timeZone": "Central Standard Time"
+			}
+		}
+	}
+}
