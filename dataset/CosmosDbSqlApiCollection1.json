@@ -7,7 +7,35 @@
 		},
 		"annotations": [],
 		"type": "CosmosDbSqlApiCollection",
-		"schema": {},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"station_status": {
+					"type": "string"
+				},
+				"num_bikes_available": {
+					"type": "integer"
+				},
+				"last_reported": {
+					"type": "integer"
+				},
+				"station_id": {
+					"type": "string"
+				},
+				"num_ebikes_available": {
+					"type": "integer"
+				},
+				"num_docks_available": {
+					"type": "integer"
+				},
+				"last_updated": {
+					"type": "integer"
+				},
+				"ttl": {
+					"type": "integer"
+				}
+			}
+		},
 		"typeProperties": {
 			"collectionName": "station_status"
 		}
