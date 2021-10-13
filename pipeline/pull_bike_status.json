@@ -95,7 +95,7 @@
 									"path": "$['last_updated']"
 								},
 								"sink": {
-									"path": "$['_ts']"
+									"path": "$['last_updated']"
 								}
 							},
 							{
