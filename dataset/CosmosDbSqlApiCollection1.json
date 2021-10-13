@@ -37,7 +37,7 @@
 			}
 		},
 		"typeProperties": {
-			"collectionName": "station_status2"
+			"collectionName": "station_status"
 		}
 	}
 }
