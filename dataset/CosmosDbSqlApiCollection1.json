@@ -9,7 +9,7 @@
 		"type": "CosmosDbSqlApiCollection",
 		"schema": {},
 		"typeProperties": {
-			"collectionName": "bike-status"
+			"collectionName": "station_status"
 		}
 	}
 }
