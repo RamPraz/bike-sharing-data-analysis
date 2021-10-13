@@ -35,34 +35,10 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "['station_status']"
+									"path": "['legacy_id']"
 								},
 								"sink": {
-									"path": "station_status"
-								}
-							},
-							{
-								"source": {
-									"path": "['num_bikes_available']"
-								},
-								"sink": {
-									"path": "num_bikes_available"
-								}
-							},
-							{
-								"source": {
-									"path": "['last_reported']"
-								},
-								"sink": {
-									"path": "last_reported"
-								}
-							},
-							{
-								"source": {
-									"path": "['station_id']"
-								},
-								"sink": {
-									"path": "station_id"
+									"path": "$['id']"
 								}
 							},
 							{
@@ -70,7 +46,23 @@
 									"path": "['num_ebikes_available']"
 								},
 								"sink": {
-									"path": "num_ebikes_available"
+									"path": "$['num_ebikes_available']"
+								}
+							},
+							{
+								"source": {
+									"path": "['num_bikes_available']"
+								},
+								"sink": {
+									"path": "$['num_bikes_available']"
+								}
+							},
+							{
+								"source": {
+									"path": "['last_reported']"
+								},
+								"sink": {
+									"path": "$['last_reported']"
 								}
 							},
 							{
@@ -78,7 +70,23 @@
 									"path": "['num_docks_available']"
 								},
 								"sink": {
-									"path": "num_docks_available"
+									"path": "$['num_docks_available']"
+								}
+							},
+							{
+								"source": {
+									"path": "['station_id']"
+								},
+								"sink": {
+									"path": "$['station_id']"
+								}
+							},
+							{
+								"source": {
+									"path": "['station_status']"
+								},
+								"sink": {
+									"path": "$['station_status']"
 								}
 							},
 							{
@@ -86,7 +94,7 @@
 									"path": "$['last_updated']"
 								},
 								"sink": {
-									"path": "last_updated"
+									"path": "$['_ts']"
 								}
 							},
 							{
@@ -94,7 +102,7 @@
 									"path": "$['ttl']"
 								},
 								"sink": {
-									"path": "ttl"
+									"path": "$['ttl']"
 								}
 							}
 						],
