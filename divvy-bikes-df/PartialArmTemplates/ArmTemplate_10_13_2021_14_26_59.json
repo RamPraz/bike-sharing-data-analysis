@@ -1,0 +1,263 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "divvy-bikes-df"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/pull_bike_status')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "JsonSource",
+								"storeSettings": {
+									"type": "HttpReadSettings",
+									"requestMethod": "GET"
+								},
+								"formatSettings": {
+									"type": "JsonReadSettings"
+								}
+							},
+							"sink": {
+								"type": "CosmosDbSqlApiSink",
+								"writeBehavior": "insert"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "[['legacy_id']"
+										},
+										"sink": {
+											"path": "$['id']"
+										}
+									},
+									{
+										"source": {
+											"path": "[['num_ebikes_available']"
+										},
+										"sink": {
+											"path": "$['num_ebikes_available']"
+										}
+									},
+									{
+										"source": {
+											"path": "[['num_bikes_available']"
+										},
+										"sink": {
+											"path": "$['num_bikes_available']"
+										}
+									},
+									{
+										"source": {
+											"path": "[['last_reported']"
+										},
+										"sink": {
+											"path": "$['last_reported']"
+										}
+									},
+									{
+										"source": {
+											"path": "[['num_docks_available']"
+										},
+										"sink": {
+											"path": "$['num_docks_available']"
+										}
+									},
+									{
+										"source": {
+											"path": "[['station_id']"
+										},
+										"sink": {
+											"path": "$['station_id']"
+										}
+									},
+									{
+										"source": {
+											"path": "[['station_status']"
+										},
+										"sink": {
+											"path": "$['station_status']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['last_updated']"
+										},
+										"sink": {
+											"path": "$['_ts']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['ttl']"
+										},
+										"sink": {
+											"path": "$['ttl']"
+										}
+									}
+								],
+								"collectionReference": "$['data']['stations']"
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "bike_status_src",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "CosmosDbSqlApiCollection1",
+								"type": "DatasetReference"
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/bike_status_src')]",
+				"[concat(variables('factoryId'), '/datasets/CosmosDbSqlApiCollection1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CosmosDbSqlApiCollection1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "CosmosDb1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CosmosDbSqlApiCollection",
+				"schema": {
+					"type": "object",
+					"properties": {
+						"station_status": {
+							"type": "string"
+						},
+						"num_bikes_available": {
+							"type": "integer"
+						},
+						"last_reported": {
+							"type": "integer"
+						},
+						"station_id": {
+							"type": "string"
+						},
+						"num_ebikes_available": {
+							"type": "integer"
+						},
+						"num_docks_available": {
+							"type": "integer"
+						},
+						"last_updated": {
+							"type": "integer"
+						},
+						"ttl": {
+							"type": "integer"
+						}
+					}
+				},
+				"typeProperties": {
+					"collectionName": "station_status"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/bike_status_src')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Divvy status api",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Divvy status api')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Divvy status api')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "HttpServer",
+				"typeProperties": {
+					"url": "https://gbfs.divvybikes.com/gbfs/fr/station_status.json",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/10_mins')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "pull_bike_status",
+							"type": "PipelineReference"
+						}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Minute",
+						"interval": 10,
+						"startTime": "2021-10-13T14:30:00",
+						"endTime": "2021-10-14T07:00:00",
+						"timeZone": "Central Standard Time"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pull_bike_status')]"
+			]
+		}
+	]
+}
