@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": "station_descriptoin.json",
 				"fileSystem": "bike-data"
 			}
 		},
