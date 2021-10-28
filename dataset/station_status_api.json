@@ -1,0 +1,17 @@
+{
+	"name": "station_status_api",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "station_status_api_call",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			}
+		},
+		"schema": {}
+	}
+}
