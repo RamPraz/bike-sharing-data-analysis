@@ -5,11 +5,26 @@
 		"factoryName": {
 			"value": "divvy-bikes-df"
 		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
 		"CosmosDb1_connectionString": {
 			"value": ""
 		},
+		"azradls_link_accountKey": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://azrbikesharing.dfs.core.windows.net"
+		},
 		"Divvy status api_properties_typeProperties_url": {
 			"value": "https://gbfs.divvybikes.com/gbfs/fr/station_status.json"
+		},
+		"azradls_link_properties_typeProperties_url": {
+			"value": "https://azradls.dfs.core.windows.net"
+		},
+		"station_status_api_call_properties_typeProperties_url": {
+			"value": "https://gbfs.divvybikes.com/gbfs/es/station_information.json"
 		}
 	}
 }
