@@ -1,0 +1,75 @@
+{
+	"name": "Notebook 2",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "2d4ecdcf-7d6f-4934-b9f5-c4a987b64966"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "python"
+			},
+			"language_info": {
+				"name": "python"
+			}
+		},
+		"cells": [
+			{
+				"cell_type": "markdown",
+				"source": [
+					"# NOTE\n",
+					"\n",
+					"For Spark 3 Cosmos DB connector has slightly different configuration. Please select different snippest if a Spark 3.1 + pool is attached."
+				],
+				"attachments": null
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"# Load a streaming Spark DataFrame from a Cosmos DB container\n",
+					"# To select a preferred list of regions in a multi-region Cosmos DB account, add .option(\"spark.cosmos.preferredRegions\", \"<Region1>,<Region2>\")\n",
+					"\n",
+					"# For Spark 2.4\n",
+					"dfStream = spark.readStream\\\n",
+					"    .format(\"cosmos.oltp\")\\\n",
+					"    .option(\"spark.synapse.linkedService\", \"DivvyCosmosDB\")\\\n",
+					"    .option(\"spark.cosmos.container\", \"station_status\")\\\n",
+					"    .option(\"spark.cosmos.changeFeed.readEnabled\", \"true\")\\\n",
+					"    .option(\"spark.cosmos.changeFeed.startFromTheBeginning\", \"true\")\\\n",
+					"    .option(\"spark.cosmos.changeFeed.checkpointLocation\", \"/localReadCheckpointFolder\")\\\n",
+					"    .option(\"spark.cosmos.changeFeed.queryName\", \"streamQuery\")\\\n",
+					"    .load()\n",
+					"\n",
+					"# For Spark 3.1 +\n",
+					"# dfStream = spark.readStream\\\n",
+					"#     .format(\"cosmos.oltp.changeFeed\")\\\n",
+					"#     .option(\"spark.synapse.linkedService\", \"DivvyCosmosDB\")\\\n",
+					"#     .option(\"spark.cosmos.container\", \"station_status\")\\\n",
+					"#     .option(\"spark.cosmos.changeFeed.startFrom\", \"Beginning\")\\\n",
+					"#     .option(\"spark.cosmos.changeFeed.mode\", \"Incremental\")\\\n",
+					"#     .load()\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": null
+			}
+		]
+	}
+}

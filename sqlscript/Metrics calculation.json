@@ -1,0 +1,17 @@
+{
+	"name": "Metrics calculation",
+	"properties": {
+		"content": {
+			"query": "select start_station_name ,end_station_name, count(*) as count  from trip_data\nwhere start_station_id is not null and  end_station_id is not null\ngroup by start_station_name, end_station_name\norder by count desc; \n\n ( DateKey nvarchar(15), \nDATE DATE,\n[Day] INT,\nDaySuffix nvarchar(5),\nWeekday INT,\nWeekDayName nvarchar(15),\nWeekDayName_Short nvarchar(15),\nWeekDayName_FirstLetter nvarchar(1),\nDOWInMonth INT,\nDayOfYear INT,\nWeekOfMonth INT,\nWeekOfYear INT,\n[Month] INT,\nMonthName nvarchar(15),\nMonthName_Short nvarchar(15),\nMonthName_Short_FirstLetter nvarchar(5),\nQuarter INT,\nQuarterName nvarchar(15),\n[Year] nvarchar(15),\nMMYYYY nvarchar(15),\nMonthYear  nvarchar(15),\nIsWeekend  nvarchar(15),\nIsHoliday nvarchar(15),\nHolidayName nvarchar(15),\nSpecialDays nvarchar(15),\nFinancialYear  nvarchar(15),\nFinancialQuarter nvarchar(15),\nFinancialMonth nvarchar(15),\nFirstDateOfYear nvarchar(15),\nLastDateofYeAR nvarchar(15),\nFirstDateofQuarter nvarchar(15),\nLastDateofQuarter nvarchar(15),\nFirstDateofMonth nvarchar(15),\nLastDateofMonth nvarchar(15),\nFirstDateofWeek nvarchar(15),\nLastDateofWeek nvarchar(15),\nCurrentYear nvarchar(15),\nCurrentQuarter nvarchar(15),\nCurrentMonth nvarchar(15),\nCurrentWeek nvarchar(15),\nCurrentDay nvarchar(15),\nfiscal_year nvarchar(15),\nfiscal_quarter nvarchar(15),\nfiscal_month nvarchar(15),\nym_short nvarchar(15)\n)\n\ncreate table calendar \nSELECT\n* \nFROM\n    OPENROWSET(\n        BULK 'https://azradls.dfs.core.windows.net/bike-data/calendar_table.csv',\n        FORMAT = 'CSV',\n    PARSER_VERSION = '2.0',\n    HEADER_ROW = TRUE) as [calendar];\n\n\nselect *  from trip_data , \nSELECT\ntop 10 * \nFROM\n    OPENROWSET(\n        BULK 'https://azradls.dfs.core.windows.net/bike-data/calendar_table.csv',\n        FORMAT = 'CSV',\n    PARSER_VERSION = '2.0',\n    HEADER_ROW = TRUE) as [calendar]\n    where calendar.day = DAY(started_at)\n    calendar.month  MONTH(started_at)\n    calendar.year = YEAR(started_at); \n\n\nselect top 10 *  from station_description ; ",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "default",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

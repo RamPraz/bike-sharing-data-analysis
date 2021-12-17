@@ -1,0 +1,17 @@
+{
+	"name": "cosmosdb",
+	"properties": {
+		"content": {
+			"query": "select TOP 100 * from \nOPENROWSET(\n    'CosmosDB',\n    'account=divvy-db-sl;database=divvy-real-time;region=North Central US;key=hVth0wGvWehmryS35HUb5tkKbkB9yIy73xEuvZ18HUmyGo3n7JSgM96kZkbOf02Vn1VsCDgd5KXvmBbsTpDg6w==',\n    station_information\n) station\n\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "master",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
