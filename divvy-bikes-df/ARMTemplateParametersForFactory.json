@@ -11,7 +11,13 @@
 		"CosmosDb1_connectionString": {
 			"value": ""
 		},
+		"DivvyCosmosDB_connectionString": {
+			"value": ""
+		},
 		"azradls_link_accountKey": {
+			"value": ""
+		},
+		"divvy-wh-WorkspaceDefaultSqlServer_connectionString": {
 			"value": ""
 		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
@@ -21,6 +27,9 @@
 			"value": "https://gbfs.divvybikes.com/gbfs/fr/station_status.json"
 		},
 		"azradls_link_properties_typeProperties_url": {
+			"value": "https://azradls.dfs.core.windows.net"
+		},
+		"divvy-wh-WorkspaceDefaultStorage_properties_typeProperties_url": {
 			"value": "https://azradls.dfs.core.windows.net"
 		},
 		"station_status_api_call_properties_typeProperties_url": {
