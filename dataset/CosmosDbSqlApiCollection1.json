@@ -39,5 +39,6 @@
 		"typeProperties": {
 			"collectionName": "station_status"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }

@@ -1,5 +1,6 @@
 {
 	"name": "station_status_api_call",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "HttpServer",

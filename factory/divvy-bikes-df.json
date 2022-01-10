@@ -1,0 +1,9 @@
+{
+	"name": "divvy-bikes-df",
+	"location": "centralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "40073895-5050-46da-a0eb-c0e67975b1b1",
+		"tenantId": "de24721d-0ef6-4c39-a98f-42ff653aad91"
+	}
+}
